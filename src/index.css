@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme {
+  --color-premium-blue: #2563eb;
+  --color-premium-blue-dark: #1e40af;
+  --color-premium-dark: #020617;
+  --color-premium-surface: #0f172a;
+}
+
+@variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  html {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  body {
+    @apply antialiased text-gray-900 bg-gray-50 dark:text-gray-100 dark:bg-slate-950;
+  }
+
+  input, select, textarea {
+    @apply bg-white border border-gray-200 rounded-lg px-4 py-2 transition-all focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none
+           dark:bg-slate-900 dark:border-slate-800 dark:focus:ring-blue-500/10 dark:text-white;
+  }
+
+  button:not(.nav-item) {
+    @apply transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+}
+
+@utility premium-card {
+  @apply p-6 rounded-2xl border border-gray-200/60 bg-white/80 backdrop-blur-sm shadow-sm transition-all hover:shadow-lg hover:shadow-blue-500/5 
+         dark:bg-slate-900/90 dark:border-slate-800/60 dark:text-gray-100 dark:hover:shadow-blue-900/10;
+}
+
+@utility glass-panel {
+  @apply bg-white/70 backdrop-blur-md border border-white/20 dark:bg-slate-950/70 dark:border-slate-800/30;
+}
