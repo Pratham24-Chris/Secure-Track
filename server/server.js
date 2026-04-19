@@ -83,7 +83,7 @@ app.use(cookieParser())
 
 app.use(cors({
   origin: [
-    "https://secure-track-theta.vercel.app/",
+    "https://secure-track-theta.vercel.app",
     "http://localhost:5173"
   ],
   credentials: true
