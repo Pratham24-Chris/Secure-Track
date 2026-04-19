@@ -1,3 +1,4 @@
+const cors = require("cors");
 require("dotenv").config()
 require("dns").setDefaultResultOrder("ipv4first");
 const express = require("express")
@@ -25,7 +26,7 @@ const cookieParser = require("cookie-parser")
 const jwt = require("jsonwebtoken")
 const authMiddleware = require("./middleware/auth")
 const app = express()
-
+app.use(cors());
 // REQUIRED for Render/Heroku/any reverse proxy
 // Without this, express-rate-limit crashes because Render adds X-Forwarded-For headers
 // but Express doesn't know to trust them — causing a validation mismatch on every request
@@ -48,7 +49,12 @@ const globalLimiter = rateLimit({
   message: { message: "Too many requests. Please slow down." },
 })
 app.use(globalLimiter)
+app.options("*", cors());
 
+app.use(cors({
+  origin: "https://secure-track-theta.vercel.app",
+  credentials: true
+}));
 // Specific limiters for sensitive auth endpoints
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
